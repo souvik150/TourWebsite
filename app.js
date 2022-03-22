@@ -168,11 +168,11 @@ tourRouter.route('/:id')
     .patch(updateTour)
     .delete(deleteTour);
 
-app.route('/')
+userRouter.route('/')
     .get(getAllUsers)
     .post(createUser);
 
-app.route('/:id')
+userRouter.route('/:id')
     .get(getUser)
     .patch(updateUser)
     .delete(deleteUser);
