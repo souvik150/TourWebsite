@@ -119,7 +119,7 @@ tourSchema.pre('save', function(next) {
 // tourSchema.pre('find', function(next) {
 tourSchema.pre(/^find/, function(next) {
   this.find({ secretTour: { $ne: true } });
-  // this.start = Date.now();
+  this.start = Date.now();
   next();
 });
 
@@ -130,12 +130,12 @@ tourSchema.post(/^find/, function(docs, next) {
 });
 
 //====================================================//
-//Aggregation middleware: runs before .aggregate()
-// tourSchema.pre('aggregate', function(next) {
-//   this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
-//   console.log(this.pipeline());
-//   next();
-// });
+// Aggregation middleware: runs before .aggregate()
+tourSchema.pre('aggregate', function(next) {
+  this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
+  console.log(this.pipeline());
+  next();
+});
 
 const Tour = mongoose.model('Tour', tourSchema);
 
