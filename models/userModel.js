@@ -20,7 +20,8 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'A user must have a password'],
-    minlength: [8, 'A password must have more or equal then 8 characters']
+    minlength: [8, 'A password must have more or equal then 8 characters'],
+    select: false
   },
   passwordConfirm: {
     type: String,
@@ -30,7 +31,8 @@ const userSchema = new mongoose.Schema({
       validator: function(el) {
         return el === this.password;
       }
-    }
+    },
+    message: 'Passwords are not the same!'
   }
 });
 
@@ -39,10 +41,12 @@ userSchema.pre('save', async function(next) {
   // Only run this function if password was actually modified
   if (!this.isModified('password')) return next();
 
+  // Hash the password with cost of 12
   this.password = await bcrypt.hash(this.password, 12);
 
   // Delete passwordConfirm field
   this.passwordConfirm = undefined;
+  next();
 });
 
 const User = mongoose.model('User', userSchema);
