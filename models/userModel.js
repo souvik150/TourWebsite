@@ -38,10 +38,7 @@ const userSchema = new mongoose.Schema({
       message: 'Passwords are not the same!'
     }
   },
-  passwordChangedAt: {
-    type: Date,
-    default: Date.now()
-  }
+  passwordChangedAt: Date
 });
 
 // .presave works before saving it to database
