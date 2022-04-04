@@ -130,9 +130,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   //2) Generate the random reset token
   const resetToken = user.createPasswordResetToken();
-  await user.save({
-    validateBeforeSave: false
-  });
+  await user.save({});
 
   //3) Set the reset token to user
 
