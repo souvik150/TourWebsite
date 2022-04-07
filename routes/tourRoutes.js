@@ -3,9 +3,24 @@ const tourController = require('./../controllers/tourController');
 
 const authController = require('./../controllers/authController');
 
+// const reviewController = require('./../controllers/reviewController');
+const reviewRouter = require('./../routes/reviewRoutes');
+
 const router = express.Router();
 
 // router.param('id', tourController.checkID);
+
+//Messy beacuse we put a router to create a review in the tour router
+
+// router
+//   .route('/:tourId/reviews')
+//   .post(
+//     authController.protect,
+//     authController.restrictTo('user'),
+//     reviewController.createReview
+//   );
+
+router.use('/:tourId/reviews', reviewRouter);
 
 router
   .route('/top-5-cheap')
