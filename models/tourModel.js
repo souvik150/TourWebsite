@@ -119,6 +119,12 @@ const tourSchema = new mongoose.Schema(
           ref: 'User'
         }
       ]
+    // reviews: [
+    //   {
+    //     type: mongoose.Schema.ObjectId,
+    //     ref: 'Review'
+    //   }
+    // ]
 
     //Embedding
     // [
@@ -137,6 +143,15 @@ const tourSchema = new mongoose.Schema(
 tourSchema.virtual('durationWeeks').get(function() {
   //Since we need the this keyword we used the normal function instead of arroow function
   return this.duration / 7;
+});
+
+//===================================================//
+// Virtual populate
+
+tourSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'tour',
+  localField: '_id'
 });
 
 //==================================================//
