@@ -170,6 +170,7 @@ tourSchema.pre('save', function(next) {
 
 //====================================================//
 //Query middleware: runs before .find() and .findOne()
+
 // tourSchema.pre('find', function(next) {
 tourSchema.pre(/^find/, function(next) {
   this.find({ secretTour: { $ne: true } });
@@ -180,6 +181,15 @@ tourSchema.pre(/^find/, function(next) {
 tourSchema.post(/^find/, function(docs, next) {
   // console.log(docs);
   console.log(`Query took ${Date.now() - this.start} milliseconds!`);
+  next();
+});
+
+tourSchema.pre(/^find/, function(next) {
+  this.start = Date.now();
+  this.populate({
+    path: 'guides',
+    select: '-__v -passwordChangedAt'
+  });
   next();
 });
 
