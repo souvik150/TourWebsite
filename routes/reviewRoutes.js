@@ -2,15 +2,15 @@ const express = require('express');
 const reviewController = require('./../controllers/reviewController');
 const authController = require('./../controllers/authController');
 
-//This merge params allows us to get access to the params in the url
 const router = express.Router({ mergeParams: true });
 
-//POST /tour/32324/reviews
-//GET /tour/32324/reviews
-//POST /reviews
+// POST /tour/32434fs35/reviews
+// GET /tour/32434fs35/reviews
+// POST /reviews
 
 router.use(authController.protect);
 
+// user review routes
 router
   .route('/')
   .get(reviewController.getAllReviews)
@@ -22,7 +22,7 @@ router
 
 router
   .route('/:id')
-  .get(reviewController.getReview)
+  .get(reviewController.getlReview)
   .patch(
     authController.restrictTo('user', 'admin'),
     reviewController.updateReview
