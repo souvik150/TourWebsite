@@ -2,6 +2,7 @@
 
 const Review = require('./../models/reviewModel');
 const catchAsync = require('./../utlis/catchAsync');
+const factory = require('./../controllers/handlerFactory');
 
 exports.getAllReviews = catchAsync(async (req, res, next) => {
   let filter = {};
@@ -32,3 +33,5 @@ exports.createReview = catchAsync(async (req, res, next) => {
     }
   });
 });
+
+exports.deleteReview = factory.deleteOne(Review);
