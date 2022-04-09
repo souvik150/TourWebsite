@@ -162,7 +162,7 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     //Grant access to protected routes
     //.locals is used to pass data to the pug
     res.locals.user = currentUser;
-    next();
+    return next();
   }
   next();
 });
