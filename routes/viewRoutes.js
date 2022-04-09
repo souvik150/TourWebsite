@@ -4,7 +4,9 @@ const viewsController = require('../controllers/viewsController');
 const router = express.Router();
 
 router.get('/', viewsController.getOverview);
-
 router.get('/tour/:slug', viewsController.getTour);
+
+// Login
+router.get('/login', viewsController.getLoginForm);
 
 module.exports = router;
